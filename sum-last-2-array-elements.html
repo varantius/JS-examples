@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function largestPairSum(numbers){
+        numbers.sort(function(a, b){ return b - a });
+        return numbers[0] + numbers[1];
+    }
+
+
+
+    function largestPairSum(numbers)
+    {
+
+       var sortArray =  numbers.sort( function( a, b){
+           return a - b;
+       });
+
+        var arraySlice = (sortArray.slice(-2).reverse());
+
+        var sumArray = arraySlice.reduce(function (a, b) {
+            return a + b;
+        });
+
+        return sumArray;
+    }
+
+    console.log(largestPairSum([-10, -8, -16, -18, -19]));
+
+</script>
+</body>
+</html>

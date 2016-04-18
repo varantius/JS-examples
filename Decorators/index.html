@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        function sum(a, b){
+            return a + b;
+        }
+
+        function Decorator(sumFromFunc){
+            return function () {
+                return 2 * sumFromFunc.apply(this, arguments);
+            };
+        }
+
+         var finalSum = Decorator(sum);
+
+         console.log(finalSum(2, 5));
+
+
+
+
+
+
+
+         function sumArgs() {
+  // скопируем reduce из массива
+		 		arguments.reduce = [].reduce;
+		  		return arguments.reduce(function(a, b) {
+		    		return a + b;
+  			});
+		}
+
+		alert( sumArgs(4, 5, 6) ); // 15
+
+
+
+		function sumArgs() {
+		  // запустим reduce из массива напрямую
+		  return [].reduce.call(arguments, function(a, b) {
+		    return a + b;
+		  });
+		}
+
+		alert( sumArgs(4, 5, 6) ); // 15
+
+
+
+
+		function sayHi() {
+		  for (var i = 0; i < arguments.length; i++) {
+		    alert( "Привет, " + arguments[i] );
+		  }
+		}
+
+		sayHi("Винни", "Пятачок"); // 'Привет, Винни', 'Привет, Пятачок'
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

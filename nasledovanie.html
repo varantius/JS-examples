@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+    var Charachter = (function() {
+
+        var Charachter = function(setting) {
+            this.name = setting.name;
+            this.health = setting.health || 100;
+            this.exp = setting.exp || 0;
+            this.strength = setting.strength || 1;
+        };
+
+        Charachter.prototype.walk = function(steps) {
+            console.log(this.name + ' walked ' + steps + ' steps');
+        };
+
+        Charachter.prototype.run = function(steps) {
+            console.log(this.name + ' ran ' + 2 * steps + ' steps');
+        };
+
+        return Charachter;
+    })();
+
+
+    var charachter = new Charachter({
+        name: 'John',
+        strength: 15,
+        exp: 10
+    });
+    console.table(charachter); // {"name":"John", "health":100, "exp":10, "strength":15}
+    charachter.walk(10);     // John walked 10 steps
+    charachter.run(40);      // John ran 80 steps
+
+
+
+
+
+    var Human = (function() {
+        var Human = function(settings) {
+            Charachter.apply(this, arguments);
+        };
+
+        Human.prototype = Object.create(Charachter.prototype);
+        Human.prototype.constructor = Charachter;
+
+        Human.prototype.build = function(buildingStrength) {
+            this.health += buildingStrength;
+        };
+
+        return Human;
+    })();
+
+    var human = new Human({name: 'John', health: 10});
+
+    console.log(human.health); // 10
+    human.build(10);
+    console.log(human.health); // 20
+    human.walk(10); // John walked 10 steps
+    human.run(50);  // John ran 100 steps
+
+
+
+
+    var Orc = (function() {
+
+        var Orc = function(settings) {
+            Charachter.apply(this, arguments);
+        };
+
+        Orc.prototype = Object.create(Charachter.prototype);
+        Orc.prototype.constructor = Charachter;
+
+        Orc.prototype.getAngry = function(color, times) {
+            if (color === 'red') {
+                this.damage *= times;
+            }
+        };
+    })();
+
+
+
+    var Elf = (function() {
+
+        var Elf = function(settings) {
+            Charachter.apply(this, arguments);
+        };
+
+        Elf.prototype = Object.create(Charachter.prototype);
+        Elf.prototype.constructor = Charachter;
+
+        Elf.prototype.shoot = function(distance) {
+            console.log(this.name + ' shot an arrow to' + distance + ' meters');
+        };
+    })();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+
+    var val = (function () {
+
+
+
+
+        function inherit(child, parent){
+            child.prototype = Object.create(parent.prototype);
+            //child.prototype.parent = parent;
+            child.prototype.constructor = child;
+        }
+
+
+
+        var Validate = function (length, speed) {
+            this.setLength(length);
+            this.setSpeed(speed);
+        };
+
+        Validate.prototype.setLength = function (length) {
+            this.length = length;
+        };
+        Validate.prototype.setSpeed = function (speed) {
+            this.speed = speed;
+        };
+
+        Validate.prototype.getLength = function () {
+            return this.length;
+        };
+        Validate.prototype.getSpeed = function () {
+            return this.speed;
+        };
+        Validate.prototype.valid = false;
+        Validate.prototype.required = true;
+
+
+        var ValidateFirstname = function () {
+            Validate.prototype.constructor.apply(this, arguments);
+            //Validate.prototype.setSpeed.apply(this, arguments);
+        };
+
+        var ValidateLastname = function () {
+            Validate.prototype.constructor.apply(this, arguments);
+        };
+        var ValidateCompany = function () {
+            Validate.prototype.constructor.apply(this, arguments);
+        };
+        var ValidateStreet = function () {
+            Validate.prototype.constructor.apply(this, arguments);
+        };
+        var ValidatePostalCode = function () {
+            Validate.prototype.constructor.apply(this, arguments);
+        };
+        ValidatePostalCode.prototype.regexp = /^\d{4,}$/;
+
+
+        inherit(ValidateFirstname, Validate);
+        inherit(ValidateLastname, Validate);
+        inherit(ValidateCompany, Validate);
+        inherit(ValidateStreet, Validate);
+        inherit(ValidatePostalCode, Validate);
+
+
+        var v = new Validate();
+        var validate_first_name = new ValidateFirstname(2,300);
+        var validate_last_name = new ValidateFirstname(2,300);
+        var validate_company = new ValidateFirstname(2,300);
+        var validate_street = new ValidateFirstname(4,300);
+        var validate_postal_code = new ValidateFirstname(4,300);
+
+        console.log(v);
+
+
+        console.log(v.getLength(), v.getSpeed());
+        console.log(validate_first_name.getLength(), validate_first_name.getSpeed());
+        console.log(validate_last_name.getLength(), validate_last_name.getSpeed());
+        console.log(validate_company.getLength(), validate_company.getSpeed());
+        console.log(validate_street.getLength(), validate_street.getSpeed());
+        console.log(validate_postal_code.getLength(), validate_postal_code.getSpeed());
+
+
+        if(!validate_first_name.valid){
+            //    успешная проверка
+        }
+
+
+        //createField.prototype.regexp = /^[A-z0-9-_+. ,@]{1,}$/ig;
+
+
+
+    })();
+</script>
+</body>
+</html>

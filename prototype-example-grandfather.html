@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+//    var F = function (name) {
+////        this.name = name;
+//        this.setName(name);
+//    };
+//
+//    var F2 = function (name, age) {
+//        this.setName(name);
+//        this.setAge(age);
+//    };
+//
+//    F.prototype.setName = function (name) {
+//        this.name = name;
+//    };
+//
+//    F.prototype.getName = function () {
+//        return this.name;
+//    };
+//
+//    function inherit(child, parent){
+//        child.prototype = Object.create(parent.prototype);
+//        child.prototype.parent = parent;
+//        child.prototype.constructor = child;
+//    }
+//
+//    inherit(F2, F);
+//
+//    F2.prototype.setName = function (name) {
+////        this.name = name;
+////       F.prototype.setName.apply(this, arguments);
+//
+//        /*Если родитель неизвестный*/
+////       F2.parent.prototype.setName.call(this, name);
+//        /*или*/
+//        this.parent.prototype.setName.call(this, name);
+//
+//        console.log("tra-la-la");
+//
+//    };
+//    F2.prototype.setAge = function (age) {
+//        this.age = age;
+//    };
+//
+//    F2.prototype.getAge = function () {
+//        return this.age;
+//    };
+//
+//    var obj1 = new F('Slava');
+//    var obj2 = new F2('Petr',23);
+//
+//    console.log(obj1.constructor);
+//    console.log(obj2.constructor);
+//
+//    console.log(obj1.getName());
+//
+//    console.log(obj2.getName(), obj2.getAge());
+//
+//    console.log("-----------------------------");
+//
+//
+//
+
+
+
+
+    function inherit (child, parent){
+        child.prototype = Object.create(parent.prototype);
+        child.prototype.parent = parent;
+        child.prototype.constructor = child;
+    }
+
+
+
+    var Grandfather = function () {}; // Конструктор Grandfather
+    var Father = function () {}; // Конструктор Father
+    var Son = function () {}; // Конструктор Son
+    var SonsSon = function () {}; // Конструктор SonsSon
+
+
+    inherit(Father, Grandfather );
+    inherit(Son, Father );
+    inherit(SonsSon,Son);
+
+
+
+    var u = new Grandfather(); // Экземпляр "класса" Grandfather
+    var f = new Father(); // Экземпляр "класса" Father
+    var s = new Son(); // Экземпляр "класса" Son
+    var ss = new SonsSon(); // Экземпляр "класса" SonsSon
+
+
+
+    Grandfather.prototype.color = 'green';
+    // Изначально все зеленые
+    console.log([u.color, f.color, s.color]); // ["green", "green", "green"]
+
+    // Дед решил поменять свой цвет и цвет потомства
+    Grandfather.prototype.color = 'blue';
+    console.log([u.color, f.color, s.color]); // ["blue", "blue", "blue"]
+
+    // Отец решил все вернуть для себя и своего потомства
+    Father.prototype.color = 'green';
+    // Хотя мог исделать и так:
+    // Grandfather.prototype.color = 'green';
+    console.log([u.color, f.color, s.color]); // ["blue", "green", "green"]
+
+    // Сын решил не брать пример с Деда и поменял только собственное свойство
+    s.color = 'black'; // Меняем собственное свойство, которое не затрагивает цепочку прототипов
+    console.log([u.color, f.color, s.color]); // ["blue", "green", "black"]
+
+    // Сын сына унаследовал от Отца
+    console.log([u.color, f.color, s.color, ss.color]); // ["blue", "green", "black", "green"]
+
+
+
+   
+
+</script>
+</body>
+</html>

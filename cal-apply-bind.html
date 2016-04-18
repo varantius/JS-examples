@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+
+    var MYAPP = (function () {
+        return {
+            sum: function (a, b) {
+                var self = this;
+
+                var umnoz = function (c, d) {
+                    console.log(self);
+                    console.log(this);
+                    return c*d ;
+                };
+//
+                console.log(umnoz(a,b));
+
+                return a+b;
+            },
+            del: function (a,b) {
+                var self = this;
+
+                console.log('fucking del');
+                return a/b;
+            }
+        }
+    })();
+
+    console.log(MYAPP.sum(2,4));
+    console.log(MYAPP.del(2,4));
+
+
+    var arr = [7,5];
+    var add = function (a,b) {
+        /*Обращение к MYAPP*/
+        console.log(this);
+        return a+b;
+    };
+
+    /*Обращение к MYAPP*/
+    //    var sum1 = add.apply(MYAPP, arr);
+    var sum1 = add.apply(MYAPP, [3,2]);
+    console.log(sum1);
+
+
+
+    console.log("---------------------------");
+
+    function showFullName( name, surname, age) {
+        console.log(( this[name] + " " + this[surname] + " " + this[age]));
+    }
+
+    var user = {
+        firstName: "Василий",
+        lastName: "Петров",
+        age: 16
+    };
+
+    showFullName.apply(user,['firstName', 'lastName' , 'age']) ;// "Василий Петров"
+
+    console.log("---------------------------");
+
+
+
+
+    function sum (a, b) {
+//        console.log( this.prop + a + b);
+        return this.prop + a + b;
+    }
+
+    var a =  {
+                prop: 1,
+//        f: sum
+                f: function () {
+
+//              var that = this;
+                    var func  = function () {
+                        console.log(this.prop);
+                    };
+
+                    func.call(this);
+                }
+
+            },
+            b = {
+                prop: 2,
+                f: sum
+            };
+
+    //    a.f= b.f.bind(b);
+    //    a.f();
+    //    b.f();
+
+    //    var newFunc = a.f.bind(b);
+    //    newFunc();
+
+    //    a.f =  a.f.bind(b,1,1);
+    //    b.f =  b.f.bind(a,2,2);
+
+    //    a.f();
+    //    b.f();
+
+    //    console.log(sum.call(b, 1, 1));
+    //    console.log(sum.call(a, 2, 2));
+
+    //    console.log(sum.apply(b, [1, 1]));
+    //    console.log(sum.apply(a, [2, 2]));
+
+    a.f();
+
+    //    var newFunc = sum.bind(b,1,1);
+    //    console.log(newFunc());
+
+    //    /*Bind накапливает аргументы*/
+    //    var newFunc = sum.bind(b,1).bind(b,2);
+    ////    newFunc = newFunc.bind(b,2);
+    //    console.log(newFunc());
+    var newFunc = sum.bind(b,1);
+    newFunc = newFunc.bind(b,2);
+    console.log(newFunc(2));
+
+
+    //    setTimeout(a.f.bind(a), 1000);
+    console.log('----------------------------------------------');
+
+
+
+</script>
+</body>
+</html>

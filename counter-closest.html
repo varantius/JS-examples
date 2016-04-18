@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    function createCounter(test) {
+        var counter = 0;
+
+        function display(){
+            console.log("Number of events: " + test + counter);
+        }
+        function increment() {
+            counter = counter + 1;
+            display();
+        }
+
+        function decrement() {
+            counter = counter - 1;
+            display();
+        }
+
+        return {
+            increment:increment,
+            decrement: decrement
+        };
+    }
+
+    var counter1 = createCounter('test');
+
+    counter1.increment();
+    counter1.increment();
+    counter1.decrement();
+    counter1.decrement();
+
+</script>
+</body>
+</html>

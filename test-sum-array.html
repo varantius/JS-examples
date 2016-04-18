@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    /*function betterThanAverage(classPoints, yourPoints) {
+        var arrLength = classPoints.length;
+        var arr = classPoints;
+        var arrSum =0;
+        for(var i = 0; i< arr.length; i++){
+            arrSum+=classPoints[i];
+
+        }
+
+        var arrResult = arrSum/arrLength;
+
+        if(arrResult < yourPoints) {
+            return true;
+        }else{
+            return false;
+        }
+    }*/
+
+
+    function betterThanAverage(classPoints, yourPoints) {
+        return yourPoints > classPoints.reduce(function (a, b) {
+                    console.log(a + b);
+                    console.log(yourPoints);
+                    return (a + b) / classPoints.length;
+                })
+    }
+
+    console.log(betterThanAverage([100, 90], 60));
+</script>
+</body>
+</html>

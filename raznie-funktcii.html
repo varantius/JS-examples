@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+
+
+    /*ВЫВОД ЧЕРЕЗ ВРЕМЯ СООБЩЕНИЙ (РАБОТА С РАЗНЫМИ ФУНКЦИЯМИ*/
+
+    var foo = function () {};
+
+    foo.delay = function (num) {
+        setTimeout(function () {
+            console.log("bingo!",num);
+        }, num);
+    };
+    foo.delay(3000);
+
+    function bar() {
+        this.delay = function (num1) {
+            setTimeout(function () {
+                console.log("Wow!",num1)
+            }, num1);
+        };
+    }
+
+    var bar = new bar;
+    bar.delay(1600); // после 0.6s: "Wow!"
+
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    function countBy(x, n) {
+
+        var result = [],
+                pushResult;
+
+        for(var i = 1; i <= n; i++){
+            pushResult = x * i;
+            result.push(pushResult);
+        }
+
+        return result;
+    }
+
+
+    countBy(2,9);
+
+    function dice(minimum, maximum){
+    var result = [];
+        for(var i = 0; minimum <= maximum; i++){
+            result.push(minimum);
+            minimum += 1;
+        }
+       var array = result.join(',');
+       return array;
+    }
+
+    console.log(dice(7,9));
+
+
+
+    var argumentsDetector = function() {
+        for (var i=0; i < arguments.length; i++) {
+            console.log('Argument ' + i + ': ' + arguments[i]);
+        }
+    };
+
+    argumentsDetector('a', 123, {c: 1}, 'pidor');
+
+
+
+    function roundToNext5(n){
+        if( n % 5 === 0){
+            return n;
+        }
+        else{
+           return  (n - n % 5) + 5
+        }
+    }
+    console.log(roundToNext5(7));
+
+
+
+    var person = {
+                _name: 'Коля',
+                talk: function() {
+                    console.log('My name is ' + this._name);
+                }
+            },
+            showName = function(place, time) {
+                console.log(['Person', this._name, 'came to the', place, 'at', time].join(' '));
+            };
+
+    showName.call(person, 'shop', '10am'); // 'Person Коля came to the shop at 10am'
+    showName.apply(person, ['shop', '10am']); // The same
+    showName.call(null, 'shop', '10am'); // The same as showName.call(window, 'shop', '10am');
+
+
+</script>
+</body>
+</html>

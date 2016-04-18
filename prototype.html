@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+    var F = function (name) {
+//        this.name = name;
+        this.setName(name);
+    };
+
+    var F2 = function (name, age) {
+        this.setName(name);
+        this.setAge(age);
+    };
+
+    F.prototype.setName = function (name) {
+        this.name = name;
+    };
+
+    F.prototype.getName = function () {
+        return this.name;
+    };
+
+
+    //    F2.prototype = F.prototype;
+
+//    F2.prototype = Object.create(F.prototype);
+//    F2.prototype.constructor = F2;
+
+
+
+
+    function inherit(child, parent){
+
+
+        child.prototype = Object.create(parent.prototype);
+        child.prototype.parent = parent;
+        child.prototype.constructor = child;
+
+
+//        var Temp = function () { };
+//        Temp.prototype = parent.prototype;
+//        child.prototype = new Temp();
+    }
+
+
+
+    inherit(F2, F);
+
+
+
+    F2.prototype.setName = function (name) {
+//        this.name = name;
+//       F.prototype.setName.apply(this, arguments);
+
+        /*Если родитель неизвестный*/
+//       F2.parent.prototype.setName.call(this, name);
+        /*или*/
+        this.parent.prototype.setName.call(this, name);
+
+        console.log("tra-la-la");
+
+    };
+    F2.prototype.setAge = function (age) {
+        this.age = age;
+    };
+
+    F2.prototype.getAge = function () {
+        return this.age;
+    };
+
+    var obj1 = new F('Slava');
+    var obj2 = new F2('Petr',23);
+
+
+
+
+
+
+
+/**
+ * Вот так вот происходит наследование методов
+ * */
+    /*obj2 = {
+        name: 'Petr',
+        age: 23,
+        __proto__: {
+            setAge: function(name){},
+            getAge: function(){},
+            __proto__: {
+                constructor: F,
+                setName: function(name){},
+                getName: function(){}
+            }
+        }
+    };*/
+
+
+
+
+
+//    obj1.setAge(22);
+
+    console.log(obj1.constructor);
+    console.log(obj2.constructor);
+
+    console.log(obj1.getName());
+
+    console.log(obj2.getName(), obj2.getAge());
+//    console.log(obj2.__proto__.__proto__.getName.call(obj2), obj2.getAge());
+
+//    console.log(F.prototype === obj1.__proto__);
+
+
+
+
+
+
+
+
+
+//    // --------- Класс-Родитель ------------
+//    // Конструктор родителя пишет свойства конкретного объекта
+//    function Animal(name) {
+//        this.name = name;
+//        this.speed = 0;
+//    }
+//
+//    // Методы хранятся в прототипе
+//    Animal.prototype.run = function () {
+//        console.log(this.name + " бежит!")
+//    }
+//
+//    // --------- Класс-потомок -----------
+//    // Конструктор потомка
+//    function Rabbit(name) {
+//        Animal.apply(this, arguments);
+//    }
+//
+//    // Унаследовать
+//    Rabbit.prototype = Object.create(Animal.prototype);
+//
+//    // Желательно и constructor сохранить
+//    Rabbit.prototype.constructor = Rabbit;
+//
+//    // Методы потомка
+//    Rabbit.prototype.run = function () {
+//        // Вызов метода родителя внутри своего
+//        Animal.prototype.run.apply(this);
+//        console.log(this.name + " подпрыгивает!");
+//    };
+//
+//    // Готово, можно создавать объекты
+//    var rabbit = new Rabbit('Кроль');
+//    rabbit.run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /***
+     * Тестирование скорости  for и for length
+     * **/
+
+//    console.time('s');
+//    var myarray = 200;
+//    var max = [];
+//    for(var i0= 0; i0 < myarray; i0++){
+//        max.push(i0);
+//    }
+//    console.timeEnd('s');
+//
+//    console.time('s1');
+//    for(var i= 0;  i < myarray; i++){
+//        var a = i/i;
+//        console.log(a);
+//    }
+//    console.timeEnd('s1');
+//
+//    console.time('s2');
+//    for(var i1= 0, m = max.length;  i1 < m; i1++){
+//        var a1 = i1/i1;
+//        console.log('final');
+//    }
+//    console.timeEnd('s2');
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

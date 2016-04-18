@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function Car(make, model, year) {
+        this.make   = make;
+        this.model  = model;
+        this.year   = year;
+    }
+
+    // create constructor prototype with object literal
+
+    /*Car.prototype.sayCar = function(){
+        alert('I have a ' + this.year + ' ' + this.make + ' ' + this.model + '.');
+    };*/
+
+    Car.prototype = {
+        sayCar: function() {
+            alert('I have a ' + this.year + ' ' + this.make + ' ' + this.model + '.');
+        }
+    };
+
+    var johnCar = new Car('Ford', 'F150', '2011');
+    johnCar.sayCar();
+
+
+
+
+
+
+    var Car1 = {
+        init: function(make, model, year) {
+            this.make   = make;
+            this.model  = model;
+            this.year   = year;
+        },
+        sayCar: function() {
+            alert('I have a ' + this.year + ' ' + this.make + ' ' + this.model + '.');
+        }
+    };
+
+
+    // create 2 car objects for John and Jane
+    var johnCar1 = Object.create(Car1),
+        janeCar1 = Object.create(Car1);
+
+    // call init method on John and Jane
+    johnCar1.init('Ford', 'F150', '2011');
+    janeCar1.init('Audi', 'A4', '2007');
+
+    // call method on Jane's car
+    janeCar1.sayCar();
+
+</script>
+</body>
+</html>

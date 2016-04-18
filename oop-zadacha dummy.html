@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+
+    // Заставьте это работать
+    function Dummy() {
+
+        if (!Dummy.cache) Dummy.cache = Object.create(Dummy.prototype);
+        return Dummy.cache;
+    }
+
+    Dummy.prototype.value = 'dummy';
+
+    Dummy.prototype.setValue = function (value) {
+        this.value = value;
+    };
+
+    Dummy.prototype.getValue = function () {
+        return this.value;
+    };
+
+    // Используем
+    var foo = new Dummy();
+    var bar = new Dummy();
+
+
+
+    bar.setValue(123);
+    //    foo.setValue(123);
+
+    // Тесты
+    console.log('-------------------');
+    console.info('foo === bar ->', foo === bar); // true
+    console.log('values:', [foo.getValue(), bar.getValue()]); // [123, 123]
+
+</script>
+</body>
+</html>

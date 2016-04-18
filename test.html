@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    function tripple(x){
+        return x*3
+    }
+
+    var waffle = tripple;
+    console.log(waffle(40));
+
+
+
+
+
+
+/**FILTER**/
+
+    var animals = [
+        { name: 'Fluffykins', specied: 'rabbit'},
+        { name: 'Caro', specied: 'dog'},
+        { name: 'Hamilton', specied: 'dog'},
+        { name: 'Harold', specied: 'fish'},
+        { name: 'Ursula', specied: 'cat'},
+        { name: 'Jimmy', specied: 'fish'}
+    ];
+
+
+/*
+    var dogs = animals.filter(function (animal) {
+        return animal.species === 'dog';
+    });
+*/
+
+
+/*    var dogs1 =[];
+    for(var i = 0; i < animals.length; i++){
+        console.log('------------------');
+        console.log(animals[i].specied);
+        if(animals[i].specied === 'dog'){
+            dogs1.push(animals[i]);
+        }
+    }*/
+
+
+   var isDog = function (animal) {
+       console.log(animal.specied);
+       return animal.specied === 'dog';
+    };
+
+    var dogs = animals.filter(isDog);
+    console.log(dogs);
+
+    var res = dogs.map(function (animal) {
+        return animal.name;
+    });
+
+    console.log(res);
+
+
+    
+/**MAP**/
+
+   /* var names = [];
+    for(var i =0; i<animals.length; i++){
+        names.push(animals[i].name);
+    }
+    console.log(names);*/
+
+
+    /*var names = animals.map(function (animal) {
+        return animal.name;
+    });*/
+
+    /**  Short ES2016 **/
+    var names = animals.map( (animal)  =>  animal.name);
+
+    console.log(names);
+
+
+/**REDUCE**/
+
+    var orders = [
+        {   amount: 340  },
+        {   amount: 400  },
+        {   amount: 340  },
+        {   amount: 600  },
+        {   amount: 340  }
+    ];
+
+   /* var total = 0;
+
+    for(var i = 0; i < orders.length; i++){
+        total += orders[i].amount;
+    }
+    console.log(total);*/
+
+      var reduceFunc = function (sum, order) {
+          console.log("hi ", sum, order);
+          return sum + order.amount;
+      };
+
+    var total = orders.reduce(reduceFunc,0);
+    console.log(total);
+
+
+
+
+
+
+/**CLOSURES**/
+
+/**CURRYING - КАРРИНГ**/
+
+
+    function sayTwoWords(word1, word2) {
+        console.log(word1 + " " + word2);
+    }
+
+    function curry(func, a) {
+        return function (b) {
+            return func(a, b);
+        };
+    }
+
+    var sayHelloTo = curry(sayTwoWords, "Hello");
+    sayHelloTo("Bob");
+    sayHelloTo("Marry");
+    sayHelloTo("Peter");
+
+    var sayGoodbyeTo = curry(sayTwoWords, "Goodbye");
+    sayGoodbyeTo("Bob");
+    sayGoodbyeTo("Marry");
+
+
+
+/**RECURSION**/
+/*Функция которая вызывает саму себя*/
+
+/*
+    function countDownFrom(num) {
+        if (num === 0) return;
+
+        console.log(num);
+        countDownFrom(num - 1);
+    }
+
+    countDownFrom(10);
+
+
+
+    var categories = [
+        { id : 'animals', parent: null},
+        { id : 'mammals', parent: 'animals'},
+        { id : 'cats', parent: 'mammals'},
+        { id : 'dogs', parent: 'mammals'},
+        { id : 'chihua', parent: 'dogs'},
+        { id : 'larador', parent: 'dogs'},
+        { id : 'persian', parent: 'cats'},
+        { id : 'siamese', parent: 'cats'}
+
+    ];
+
+    var makeTree = function (categories, parent) {
+        var node = {};
+        categories
+                .filter(function (c) {
+                   return c.parent === parent
+                })
+                .forEach(function (c) {
+                    return node[c.id] = makeTree(categories, c.id);
+                });
+        return node;
+    };
+
+    console.log( JSON.stringify( makeTree(categories, null),null, 2 ) );*/
+
+
+
+
+  /*  function pow(x, n){
+        if(n != 1){
+            return x * pow(x, n-1);
+        }else{
+            return x;
+        }
+    }
+
+    console.log(pow(2,3));*/
+
+/**FACTORY FUCNTION**/
+
+
+    var dog = function () {
+    var sound = 'woof';
+
+    return{
+         talk: function(){ console.log(sound);}
+    }
+
+};
+
+
+    var sniffles =  dog();
+    sniffles.talk();
+
+
+
+
+
+
+/**PROTOTYPES**/
+
+    var food = {
+    init: function (type) {
+        this.type = type;
+    },
+    eat: function () {
+        console.log('you ate the ' + this.type)
+    }
+};
+
+
+    food.eat = function () {
+        console.log("YOU TOTALLY ATE THE " + this.type.toUpperCase());
+    };
+
+
+
+    var waffle = Object.create(food);
+    var carrot = Object.create(food);
+
+
+    waffle.init('waffle');
+    waffle.eat();
+
+
+
+    carrot.init('carrot');
+    carrot.eat();
+
+
+
+
+
+
+
+
+    var languages = {
+        name: "JavaScript", fileExtension: ".js"
+    }
+
+    var languages1 = [
+            { name: "JavaScript", fileExtension: ".js"},
+        { name: "JavaScript", fileExtension: ".js" },
+        { name: "TypeScript", fileExtension: ".ts" },
+        { name: "CoffeeScript", fileExtension: ".coffee" }
+    ];
+    console.table(languages);
+    console.table(languages1);
+
+
+</script>
+</body>
+</html>

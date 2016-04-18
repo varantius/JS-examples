@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+
+    function Timer( options ) {
+        //public
+        var defaultOptions = {
+            delay: 20 //время между вызовами таймера в мс, каждый вызов - новый кадр
+            ,stopFrame: 0 // конечный кадр
+            ,loop: true // флаг цикличности процесса
+            ,frameElementPrefixId: 'timer_' // префикс аттрибутов ID элементов, для подсветки-визуализации процесса
+        };
+        for(var option in defaultOptions) {
+
+//            this[option] = options && options[option]!== undefined ? options[option] : defaultOptions[option];
+
+            if(options && options[option]!== undefined ){
+                this[option] =  options[option];
+            }else{
+                this[option] = defaultOptions[option];
+            }
+
+            /*Обьект со свойствами*/
+//            console.log( this);
+
+            /*вывод непосредсвенно результат*/
+//            console.log( this[option]);
+
+
+            /*Ключи обьекта defaultOptions*/
+//            console.log( option);
+
+            /*отвечает за вывод тех свойств которые мы сами задаем в new Timer*/
+//            console.log( options[option]);
+
+            /*отвечает за вывод свойствкоторые по умолчанию*/
+//            console.log( defaultOptions[option]);
+        }
+        /*тут будем кодить дальше…  */
+    }
+
+    var timer = new Timer({ delay:300});
+    console.log(timer.delay);
+
+
+</script>
+</body>
+</html>

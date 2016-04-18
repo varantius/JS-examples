@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	<title>Вывод букв</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	 <link rel="stylesheet" href="css/lnl_store_main.css" type="text/css" media="screen, projection" />
+
+<style>
+  #heart {
+    position: relative;
+    width: 100px;
+    height: 90px;
+}
+.superblock{
+  font-size: 18px;
+}
+#heart:before,
+#heart:after {
+    position: absolute;
+    content: "";
+    left: 50px;
+    top: 0;
+    width: 50px;
+    height: 80px;
+    background: red;
+    -moz-border-radius: 50px 50px 0 0;
+    border-radius: 50px 50px 0 0;
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    -webkit-transform-origin: 0 100%;
+       -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+         -o-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+}
+#heart:after {
+    left: 0;
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transform-origin: 100% 100%;
+       -moz-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+         -o-transform-origin: 100% 100%;
+            transform-origin :100% 100%;
+}                               
+    #heart{
+      display:none;
+    }
+.green_block{
+  background-color: green;
+  height: 300px;
+  width: 200px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+body{
+  position: relative;z-index: 1;
+}
+.green_block_child{
+  background-color: #cfcfcf;
+  position: absolute;
+  /*display: none;*/
+  width: 150px;
+  height: 150px;
+  top: 140px;z-index: 1000;
+}
+.green_block_close{
+  float: right;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+}
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+ 
+ $(document).ready(function(){
+
+$(".form").on("click",".submit1",function(){
+input_value = $('.input1').val();
+
+
+// в цикле функцию получается нельзя перебирать
+i = 0;
+setInterval(function(){
+    if(i<input_value.length){
+        $('.superblock').text($('.superblock').text()+input_value[i]);
+        i+=1;
+  } 
+},300);
+
+});
+
+
+
+ $(document).click( function(event){
+      if( $(event.target).is(".green_block_child")) {
+         return ;
+      }
+      $(".green_block_child").fadeOut("slow");
+    });
+});
+
+</script>
+</head>
+<body> 
+
+<div class="form">
+  <textarea type="text" class="input1" style="width:100%;height:200px;"></textarea>
+  <button class="submit1">Отправить</button>
+</div>
+<div class="superblock"></div>
+<!-- <div class="green_block"> -->
+  <div class="green_block_child">
+    <div class="green_block_close"></div>
+  </div>
+<!-- </div> -->
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    var vagabong = {
+        step: 0,
+        goUp: function () {
+            this.step++;
+            console.log('Up ' + this.step );
+            return this;
+        },
+        goDown: function () {
+            this.step--;
+            console.log('Down ' + this.step );
+            return this;
+        },
+        goLeft: function () {
+            console.log('Left ');
+            return this;
+        },
+        goRight: function () {
+            console.log('Right');
+            return this;
+        },
+        currentStep : function () {
+            console.log(this.step);
+            return this;
+        }
+
+    };
+
+    vagabong.goUp().goUp().goUp().goUp().goUp().goUp().goUp().goRight().goLeft().goDown().goUp().currentStep();
+
+</script>
+</body>
+</html>
